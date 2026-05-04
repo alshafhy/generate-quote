@@ -1,0 +1,22 @@
+services:
+  car-system-backend:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: car-system/php-8.3
+    container_name: car-system-app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8040:80"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    networks:
+      - car-system-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  car-system-network:
+    driver: bridge
